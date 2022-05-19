@@ -46,22 +46,23 @@
                 theLeftSide.appendChild(face);
             }
 
-            const leftSideImages = theLeftSide.cloneNode(true);
-            leftSideImages.removeChild(leftSideImages.lastChild);
-            theRightSide.appendChild(leftSideImages);
+            const leftSideImages = theLeftSide.cloneNode(true); //it clones all of the child nodes from theLeftSide and stores in leftSideImages
+            leftSideImages.removeChild(leftSideImages.lastChild); //removes the last child of the leftSideImages,
+            theRightSide.appendChild(leftSideImages); //adds the cloned child nodes to theRightSide
 
-            theLeftSide.lastChild.addEventListener('click', nextLevel);
-            document.body.addEventListener('click', gameOver);
+            theLeftSide.lastChild.addEventListener('click', nextLevel); //onclick --> invokes nextLevel
+            document.body.addEventListener('click', gameOver); //if user clicks anywhere else, gameOver function is invoked
         }
 
         function nextLevel(event) {
-            event.stopPropagation();
+            event.stopPropagation(); //is necessary in order to ensure that the event does not also get applied to other elements in the web page, such as other faces. That would trigger the function multiple times, which is not what we want.
             while (theLeftSide.firstChild) {
                 theLeftSide.removeChild(theLeftSide.firstChild);
             }
             while (theRightSide.firstChild) {
                 theRightSide.removeChild(theRightSide.firstChild);
             }
+            //as long as there is a child, it removes the first child.
             numberOfFaces += 5;
             generateFaces();
         }
@@ -75,3 +76,6 @@
     </script>
 </body>
 </html>
+
+
+//for next steps, I would like to add a restart button and create 3 levels (easy, medium, hard).
